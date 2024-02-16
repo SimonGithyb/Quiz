@@ -1,0 +1,21 @@
+<h1>Select Category!</h1>
+
+<div class="container-main">
+    <a (click)="open('all')">
+        <p>ALL</p>
+    </a>
+    <div class="container-img">
+        <img src="assets/all.svg" />
+    </div>
+</div>
+
+<div *ngFor="let cat of categories">
+    <div class="container">
+        <a (click)="open(cat)">
+            <p>{{cat}}</p>
+        </a>
+        <div class="container-img">
+            <img src="assets/{{cat}}.svg" alt="{{cat}}"/>
+        </div>
+    </div>
+</div>

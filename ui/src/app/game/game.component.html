@@ -1,0 +1,15 @@
+<div *ngIf="!loading">
+    <header>
+        <mat-progress-bar
+            mode="determinate"
+            value="step">
+        </mat-progress-bar>
+    </header>
+    <div>
+        
+    </div>
+</div>
+
+<div *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
