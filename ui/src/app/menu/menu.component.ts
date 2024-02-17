@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  private difficulty: string = 'random';
+
   public categories = [
     "linux",
     "bash",
@@ -28,6 +30,11 @@ export class MenuComponent implements OnInit {
 
   public open(category: string): void {
     localStorage.setItem('category', category);
+    localStorage.setItem('difficulty', this.difficulty);
+  }
+
+  public difficultyChange(value: any) {
+    this.difficulty = value;
   }
 
 }

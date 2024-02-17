@@ -28,7 +28,6 @@ const quiz = require('../svc/quiz');
  */
 
 const answer = [];
-// limit='1', category=undefined, level=undefined
 router.get('/:limit?/:category?/:level?',
 async (req, res) => {
 

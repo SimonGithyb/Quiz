@@ -1,15 +1,46 @@
-<div *ngIf="!loading">
+<div *ngIf="!loading && ! endGame">
     <header>
         <mat-progress-bar
             mode="determinate"
-            value="step">
+            value="{{step}}"
+            class="gameProggress"
+            color="warn"
+            >
         </mat-progress-bar>
+        {{currentQuestion}} / {{MaxQuestions}}
     </header>
-    <div>
-        
+    <div *ngFor="let question of questions; let  i = index">
+        <div class="question">
+            <p>{{question}}</p>
+            <div *ngFor="let answer of answers[i]">
+                {{questionLater[j]}}
+                <input 
+                    type="radio"
+                    name="{{i}}"
+                    *ngIf="!multipleCorectAnswer"
+                    (click)="checkAnswer(answer)"/>
+                <input
+                    type="checkbox"
+                    name="{{i}}"
+                    *ngIf="multipleCorectAnswer"
+                    (click)="checkAnswer(answer)"/>
+                {{answer}}
+            </div>
+        </div>
+
+        <br/><br/>
     </div>
+    <button
+        mat-button
+        color="warn">
+            Back To Menu
+    </button>
 </div>
 
-<div *ngIf="loading">
-    <mat-spinner></mat-spinner>
+<div *ngIf="loading && !endGame">
+    <mat-spinner class="loader" color="warn"></mat-spinner>
+</div>
+
+<div *ngIf="endGame">
+    <p>Congratulation you end game with score: {{score}}!!</p>
 </div>

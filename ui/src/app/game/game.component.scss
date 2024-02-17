@@ -1,4 +1,41 @@
 * {
-    align-items: center;
-    justify-content: center;
+    font-size: 25pt;
+}
+
+input {
+    margin: 12.5px;
+}
+p {
+    margin: 10px;
+}
+
+header {
+    text-align: center;
+}
+
+.loader {
+    zoom: 5;
+    position: absolute;
+    top: 50%;
+    left: 27.5%;
+    transform: translate(0, -50%);
+}
+
+.gameProggress {
+    height: 25px;
+    margin-bottom: 25px;
+}
+
+.question {
+    padding: .5%;
+    margin: .5%;
+    border: 2px solid;
+    text-align: center;
+    width: 50%;
+    position: relative;
+    left:25%;
+}
+
+button {
+    margin: 20px;
 }
