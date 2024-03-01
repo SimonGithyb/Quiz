@@ -1,0 +1,51 @@
+* {
+    font-size: 25pt;
+}
+
+input {
+    margin: 12.5px;
+}
+p {
+    margin: 10px;
+    padding: 10px;
+    -o-text-overflow: inherit;
+    text-wrap: pretty;
+}
+
+header {
+    text-align: center;
+}
+
+.loader {
+    zoom: 5;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(0, -50%);
+}
+
+.gameProggress {
+    height: 25px;
+    margin-bottom: 25px;
+}
+
+.question {
+    padding: .5%;
+    margin: .5%;
+    border: 2px solid;
+    text-align: center;
+    width: 75%;
+    height: 100%;
+    position: relative;
+    left: 10%;
+}
+
+button {
+    margin: 20px;
+}
+
+#gameIsEnd {
+    text-align: center;
+    font-size: 45pt;
+    text-decoration: double;
+}

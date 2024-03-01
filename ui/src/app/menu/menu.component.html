@@ -1,0 +1,33 @@
+<header>
+    <mat-button-toggle-group
+        name="difficulty"
+        aria-label="difficulty"
+        value="Random">
+            <mat-button-toggle value="Easy" (click)="difficultyChange('easy')">Easy</mat-button-toggle>
+            <mat-button-toggle value="Medium" (click)="difficultyChange('medium')">Medium</mat-button-toggle>
+            <mat-button-toggle value="Hard" (click)="difficultyChange('hard')">Hard</mat-button-toggle>
+            <mat-button-toggle value="Random" (click)="difficultyChange('random')">Random</mat-button-toggle>
+    </mat-button-toggle-group>
+</header>
+
+<h1>Select Category!</h1>
+
+<div class="container-main" (click)="open('all')">
+    <a>
+        <p>ALL</p>
+    </a>
+    <div class="container-img">
+        <img src="assets/all.svg" />
+    </div>
+</div>
+
+<div *ngFor="let cat of categories">
+    <div class="container" (click)="open(cat)">
+        <a>
+            <p>{{cat}}</p>
+        </a>
+        <div class="container-img">
+            <img src="assets/{{cat}}.svg" alt="{{cat}}"/>
+        </div>
+    </div>
+</div>
