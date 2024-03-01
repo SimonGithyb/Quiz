@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -23,7 +24,9 @@ export class MenuComponent implements OnInit {
     "devops"
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +34,7 @@ export class MenuComponent implements OnInit {
   public open(category: string): void {
     localStorage.setItem('category', category);
     localStorage.setItem('difficulty', this.difficulty);
+    this.router.navigate(['/game']);
   }
 
   public difficultyChange(value: any) {

@@ -7,24 +7,28 @@
             color="warn"
             >
         </mat-progress-bar>
-        {{currentQuestion}} / {{MaxQuestions}}
+        {{currentQuestion}} / {{maxQuestions}}
     </header>
-    <div *ngFor="let question of questions; let  i = index">
+    <div *ngFor="let pack of questionPack; let  i = index">
         <div class="question">
-            <p>{{question}}</p>
-            <div *ngFor="let answer of answers[i]">
-                {{questionLater[j]}}
-                <input 
-                    type="radio"
-                    name="{{i}}"
-                    *ngIf="!multipleCorectAnswer"
-                    (click)="checkAnswer(answer)"/>
-                <input
-                    type="checkbox"
-                    name="{{i}}"
-                    *ngIf="multipleCorectAnswer"
-                    (click)="checkAnswer(answer)"/>
-                {{answer}}
+            <p>{{pack.question}}</p>
+            <div *ngFor="let answer of pack.answers; let  j = index">
+                <div
+                    *ngIf="answer != null"
+                    (click)="checkAnswer(j)">
+                    {{questionLater[j]}}
+                    <input 
+                        type="radio"
+                        name="{{i}}"
+                        *ngIf="pack.multiple_correct_answers == 'false'"
+                        />
+                    <input
+                        type="checkbox"
+                        name="{{i}}"
+                        *ngIf="pack.multiple_correct_answers == 'true'"
+                        />
+                    {{answer}}
+                </div>
             </div>
         </div>
 
@@ -32,7 +36,8 @@
     </div>
     <button
         mat-button
-        color="warn">
+        color="warn"
+        (click)="goToMenu()">
             Back To Menu
     </button>
 </div>
@@ -41,6 +46,6 @@
     <mat-spinner class="loader" color="warn"></mat-spinner>
 </div>
 
-<div *ngIf="endGame">
+<div *ngIf="endGame" id="gameIsEnd">
     <p>Congratulation you end game with score: {{score}}!!</p>
 </div>

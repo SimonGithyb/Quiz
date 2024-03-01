@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MainService } from '../services/main.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-game',
@@ -12,23 +14,28 @@ export class GameComponent implements OnInit {
   private category: string;
   private difficulty: string;
   private questionLimit: number = 1;
-  private timeForNextQuestion: number = 10;
+  private timeForNextQuestion: number = 1;
+  private timeForEndScreen: number = 5;
 
   public step: number = 0;
   public currentQuestion: number = 0;
   public score: number = 0;
   public maxQuestions: number = 10;
 
-  public questionLater = ['a)', 'b)', 'c)', 'd)'];
-  public questions = [];
-  public answers = [];
+  public questionLater = ['a)', 'b)', 'c)', 'd)', 'e)', 'f)'];
+  public questionPack = [{
+    question: 'question',
+    multiple_correct_answers: 'multiple_correct_answers',
+    answers: 'answers'
+  }];
 
   public loading: boolean = false;
-  public multipleCorectAnswer: boolean = false;
   public endGame: boolean = false;
 
   constructor(
     private mainSvc: MainService,
+    private router: Router,
+    private toast: ToastService
   ) {
     this.category = localStorage.getItem("category") || "all";
     this.difficulty = localStorage.getItem("difficulty") || "random";
@@ -45,27 +52,30 @@ export class GameComponent implements OnInit {
 
     this.mainSvc.getQuestion(this.questionLimit ,this.category, this.difficulty)
       .subscribe((res: any) => {
-        res.forEach((element: any) => {
-          this.questions = element.question;
-          this.multipleCorectAnswer = element.multiple_correct_answers;
-          this.answers = element.answers;
-        });
+        this.questionPack = res;
         this.loading = false;
       });
   }
 
-  checkAnswer(answer: string) {
-    this.mainSvc.getAnswer()
+  checkAnswer(answerLatter: Number) {
+    this.mainSvc.getAnswer(answerLatter)
       .subscribe((res: any) => {
-        if (answer === res.correct_answers)
+        if(res) {
           this.score++;
+          this.toast.openSnackBar('GOOD ANSWER!');
+        } else {
+          this.toast.openSnackBar('BAD ANSWER!');
+        }
+
+        setTimeout(() => {
+          if (this.currentQuestion < this.maxQuestions)
+            this.nextQuestion();
+          else
+            this.closeGame();
+        }, this.timeForNextQuestion * 1000);
+      }, error => {
+         this.toast.openSnackBar(error, 'ERROR') 
       });
-      setTimeout(() => {
-        if (this.currentQuestion < this.maxQuestions)
-          this.nextQuestion();
-        else
-          this.closeGame();
-      }, this.timeForNextQuestion * 1000);
   }
 
   nextQuestion() {
@@ -75,5 +85,13 @@ export class GameComponent implements OnInit {
   
   closeGame() {
     this.endGame = true;
+    
+    setTimeout(() => {
+      this.goToMenu()
+    }, this.timeForEndScreen * 1000);
+  }
+
+  goToMenu() {
+    this.router.navigate(['/']);
   }
 }

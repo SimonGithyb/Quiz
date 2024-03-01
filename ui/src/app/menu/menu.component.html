@@ -12,8 +12,8 @@
 
 <h1>Select Category!</h1>
 
-<div class="container-main">
-    <a (click)="open('all')">
+<div class="container-main" (click)="open('all')">
+    <a>
         <p>ALL</p>
     </a>
     <div class="container-img">
@@ -22,8 +22,8 @@
 </div>
 
 <div *ngFor="let cat of categories">
-    <div class="container">
-        <a (click)="open(cat)">
+    <div class="container" (click)="open(cat)">
+        <a>
             <p>{{cat}}</p>
         </a>
         <div class="container-img">

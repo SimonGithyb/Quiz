@@ -17,17 +17,17 @@ export class MainService {
   getQuestion(limit?: number, category?: string, level?: string) {
     const headers = this.superServ.getHeader();
     return this.superServ.getConfig()
-      .pipe(mergeMap(config => this.http.get(config["serverUrl"] + `/${limit}/${category}/${level}`, { headers })),
+      .pipe(mergeMap(config => this.http.get(config["serverUrl"] + `/question/${limit}/${category}/${level}`, { headers })),
         catchError((err) => {
           console.error(err);
           return this.handleError(err);
         }));
   }
 
-  getAnswer() {
+  getAnswer(answerLatter: Number) {
     const headers = this.superServ.getHeader();
     return this.superServ.getConfig()
-      .pipe(mergeMap(config => this.http.get(config["serverUrl"] + `/`, { headers })),
+      .pipe(mergeMap(config => this.http.get(config["serverUrl"] + `/answer/${answerLatter}`, { headers })),
         catchError((err) => {
           console.error(err);
           return this.handleError(err);

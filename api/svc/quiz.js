@@ -13,7 +13,6 @@ class QuizApi {
               console.log(response.status);
               throw new Error("Bad response from server");
           } else{
-                console.log(response.data);
                 return response.data;
           }
             }).then((data)=>{
@@ -34,11 +33,9 @@ class QuizApi {
               console.log(response.status);
               throw new Error("Bad response from server");
           } else{
-                console.log(response.data);
                 return response.data;
           }
             }).then((data)=>{
-                console.log(data);
                 return data;
             })
     }
